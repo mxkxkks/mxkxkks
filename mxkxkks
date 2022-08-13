@@ -1,5 +1,5 @@
 --Made by mxkxkks
---Do not touch!
+--Do not touch unless you know what your doing
 
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
