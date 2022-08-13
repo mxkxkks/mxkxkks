@@ -1,0 +1,203 @@
+--Made by mxkxkks
+--Do not touch!
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local AimbotButton = Instance.new("TextButton")
+local UpdateLog = Instance.new("TextButton")
+local Exit = Instance.new("TextButton")
+local Title = Instance.new("TextLabel")
+local Open = Instance.new("TextButton")
+
+--Properties:
+
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame.BorderSizePixel = 9
+Frame.Position = UDim2.new(0.382205158, 0, 0.227574766, 0)
+Frame.Size = UDim2.new(0, 613, 0, 327)
+Frame.Style = Enum.FrameStyle.RobloxSquare
+Frame.Active = true
+Frame.Draggable = false
+
+AimbotButton.Name = "Aimbot Button"
+AimbotButton.Parent = Frame
+AimbotButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+AimbotButton.Position = UDim2.new(0.107443437, 0, 0.227644995, 0)
+AimbotButton.Size = UDim2.new(0, 200, 0, 206)
+AimbotButton.Style = Enum.ButtonStyle.RobloxRoundButton
+AimbotButton.Font = Enum.Font.GothamBlack
+AimbotButton.Text = "ENABLE AIMBOT (PRESS X TO TRIGGER)"
+AimbotButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+AimbotButton.TextScaled = true
+AimbotButton.TextSize = 14.000
+AimbotButton.TextWrapped = true
+AimbotButton.MouseButton1Down:Connect(function()
+	loadstring(game:GetObjects("rbxassetid://10583750416")[1].Source)
+end)
+
+local tabDown = false
+local input = game:GetService('UserInputService')
+local player = game.Players.LocalPlayer
+local camera = game.Workspace.CurrentCamera
+local character = player.Character 
+local head = character.Head
+local torso = character.Torso
+pos = Vector3.new(0,0,0)
+local rs = game:GetService('RunService')
+isdoing = false
+
+cor = coroutine.create(function()
+	while wait() do
+		if tabDown and I == 0 then
+			local pos = head.Position
+			local partyGoal = findGoal(head.Position)
+			local lookAt = partyGoal.Position + Vector3.new(0,180,0)
+			local mag = (character.PrimaryPart.Position - partyGoal.Position).magnitude
+			local cameraCFrame = CFrame.new(pos, lookAt)
+			camera.CFrame = cameraCFrame
+			I = I + 1
+			rs.RenderStepped:Wait()
+			I = I - 1
+			if isdoing == false then
+				coroutine.yield()
+			end
+		end
+	end
+
+
+
+end)
+
+function findGoal(position)
+	local nearestGoal = nil
+	local lowest = math.huge
+	for i,v in pairs(game.Workspace:GetDescendants()) do
+		if v.Name == 'Goal' and v:IsA('Part') then
+			local distance = (torso.Position - v.Position).magnitude
+			if distance < lowest then
+				lowest = distance
+				Goal = v
+			end
+		end
+	end
+	return Goal
+end
+
+input.InputBegan:Connect(function(key, gpe)
+	local xkey = key.KeyCode
+	if xkey == Enum.KeyCode.X then
+		tabDown = true
+		if isdoing == false then
+			wait()
+			isdoing = true 
+			coroutine.resume(cor)
+		end
+	end
+end)
+
+input.InputEnded:Connect(function(key, gpe)
+	local xkey = key.KeyCode
+	if xkey == Enum.KeyCode.X then
+		tabDown = false
+		if isdoing then
+			isdoing = false
+		end 
+	end 
+end)
+I = 0
+
+UpdateLog.Name = "UpdateLog"
+UpdateLog.Parent = Frame
+UpdateLog.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+UpdateLog.Position = UDim2.new(0.563220024, 0, 0.231229067, 0)
+UpdateLog.Size = UDim2.new(0, 200, 0, 203)
+UpdateLog.Style = Enum.ButtonStyle.RobloxRoundButton
+UpdateLog.Font = Enum.Font.GothamBlack
+UpdateLog.Text = "UPDATE LOG (CURRENTLY WORKING ON SILENT AIMBOT AND MORE!)"
+UpdateLog.TextColor3 = Color3.fromRGB(0, 0, 0)
+UpdateLog.TextScaled = true
+UpdateLog.TextSize = 14.000
+UpdateLog.TextWrapped = true
+
+Exit.Name = "Exit"
+Exit.Parent = Frame
+Exit.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Exit.Position = UDim2.new(-0.0081333071, 0, 0.193235189, 0)
+Exit.Size = UDim2.new(0, 48, 0, 43)
+Exit.Font = Enum.Font.GothamBlack
+Exit.Text = "EXIT"
+Exit.TextColor3 = Color3.fromRGB(0, 0, 0)
+Exit.TextScaled = true
+Exit.TextSize = 100.000
+Exit.TextWrapped = true
+
+Title.Name = "Title"
+Title.Parent = Frame
+Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Title.Position = UDim2.new(-0.0130505711, 0, -0.0219780225, 0)
+Title.Size = UDim2.new(0, 595, 0, 50)
+Title.Font = Enum.Font.GothamBlack
+Title.Text = "Phenom 100 Arc-camlock  | Made by mxkxkks"
+Title.TextColor3 = Color3.fromRGB(0, 0, 0)
+Title.TextScaled = true
+Title.TextSize = 14.000
+Title.TextWrapped = true
+
+Open.Name = "Open"
+Open.Parent = ScreenGui
+Open.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
+Open.Position = UDim2.new(-0.000219060574, 0, 0.915282488, 0)
+Open.Size = UDim2.new(0, 136, 0, 50)
+Open.Font = Enum.Font.GothamBlack
+Open.Text = "OPEN #FUCK EMOS"
+Open.TextColor3 = Color3.fromRGB(0, 0, 0)
+Open.TextScaled = true
+Open.TextSize = 9.000
+Open.TextWrapped = true
+
+-- Scripts:
+
+local function ETJMOV_fake_script() -- UpdateLog.LocalScript 
+	local script = Instance.new('LocalScript', UpdateLog)
+
+	local UpdateLog = script.Parent.Parent.UpdateLog
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		UpdateLog.Visible = true
+	end)
+end
+coroutine.wrap(ETJMOV_fake_script)()
+local function WZLQIWL_fake_script() -- Exit.LocalScript 
+	local script = Instance.new('LocalScript', Exit)
+
+	local Frame = script.Parent.Parent
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		Frame.Visible = false
+	end)
+end
+coroutine.wrap(WZLQIWL_fake_script)()
+local function FPFPI_fake_script() -- Frame.LocalScript 
+	local script = Instance.new('LocalScript', Frame)
+
+	local Frame = script.Parent.Parent.Frame
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		Frame.Visible = true
+	end)
+end
+coroutine.wrap(FPFPI_fake_script)()
+local function RPCWKMH_fake_script() -- Open.Open 
+	local script = Instance.new('LocalScript', Open)
+
+	local Frame = script.Parent.Parent.Frame
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		Frame.Visible = true
+	end)
+end
+coroutine.wrap(RPCWKMH_fake_script)()
